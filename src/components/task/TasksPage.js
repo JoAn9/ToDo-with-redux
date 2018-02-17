@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as taskActions from '../../actions/taskAction';
 import Footer from '../common/Footer';
+import Navigation from '../common/Navigation';
 
 class TasksPage extends React.Component {
   constructor(props, context) {
@@ -47,7 +48,7 @@ class TasksPage extends React.Component {
           type="submit"
           onClick={this.onClickSave}
           value="Save" />
-
+        <Navigation />
         <Footer />
       </div>
     );
