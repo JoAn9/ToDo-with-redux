@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux';
 import * as taskActions from '../../actions/taskAction';
 import Footer from '../common/Footer';
 import Navigation from '../common/Navigation';
+import Form from '../home/Form';
 
 class TasksPage extends React.Component {
   constructor(props, context) {
@@ -36,6 +37,7 @@ class TasksPage extends React.Component {
   render() {
     return (
       <div>
+        <h1>Hello {this.props.name}</h1>
         <h1>Tasks to do</h1>
         {this.props.tasks.map(this.taskRow)}
         <h2>Add New Task</h2>
@@ -57,7 +59,8 @@ class TasksPage extends React.Component {
 
 TasksPage.propTypes = {
   tasks: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

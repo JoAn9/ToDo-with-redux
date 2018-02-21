@@ -42,15 +42,15 @@ form {
 
 form input {
   border: 1px solid grey;
-  padding: 20px;
-  margin: 10px;
-  font-size: 20px;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: 1rem;
   width: 50%;
   border-radius: 20px;
 }
 .btn.btn-primary.btn-lg {
   border-radius: 15px;
-  height: 60px;
+  height: 3rem;
 }
 header {
   font-family: 'Lobster', cursive;

@@ -1,9 +1,11 @@
 import * as types from './actionTypes';
 
-export function createTask(task) {
-  return { type: types.CREATE_TASK, task};
-}
+let nextTodoId = 0;
 
-export function createName(name) {
-  return { type: types.CREATE_NAME, name};
+export function createTask(task) {
+  return {
+    type: types.CREATE_TASK,
+    id: nextTodoId++,
+    task
+  };
 }

@@ -1,44 +1,94 @@
 import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from "redux";
+import * as taskActions from "../../actions/taskAction";
+import * as createName from "../../actions/nameAction";
+import HelloPage from "./HelloPage";
+import TasksPage from "../task/TasksPage";
 
-const Form = () => {
-  return (
-    <form>
-      <input
-        type="text"
-        placeholder="Imię"
-        />
-      <div></div>
-      <input
-        type="text"
-        placeholder="Ulubiony zespół muzyczny"
-        />
-      <div></div>
-      <input
-        className="btn btn-primary btn-lg"
-        type="submit"
-        value="Potwierdzam dane"/>
-    </form>
-    /*<form onSubmit={this.handleSubmit}>
-      <input
-        type="text"
-        placeholder="Imię"
-        value={this.state.name}
-        onChange={this.handleNameChange}/>
-      <div>{this.state.nameText}</div>
-      <input
-        type="text"
-        placeholder="Ulubiony zespół muzyczny"
-        value={this.state.band}
-        onChange={this.handleBandChange}/>
-      <div>{this.state.bandText}</div>
-      <input
-        className="btn btn-primary btn-lg"
-        type="submit"
-        value="Potwierdzam dane"/>
-    </form>*/
+class Form extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
+    this.state = {
+      name : '',
+      band : '',
+      nameText: '',
+      bandText: '',
+      submitted: false
+    };
 
-  );
+    this.onNameChange = this.onNameChange.bind(this);
+    this.onBandChange = this.onBandChange.bind(this);
+    this.onClickSave = this.onClickSave.bind(this);
+  }
+
+  onNameChange(event) {
+    const name = this.state.name;
+    this.setState({
+      name: event.target.value
+    });
+  }
+
+  onBandChange(event) {
+    const band = this.state.band;
+    this.setState({
+      band: event.target.value
+    });
+  }
+
+  onClickSave() {
+    this.props.action.createName(this.state.name);
+    this.props.action.createBand(this.state.band);
+    this.setState({
+      submitted: true
+    });
+
+  }
+
+  render() {
+    if(this.state.submited) {
+      return <TasksPage />;
+    }
+    return (
+      <form onSubmit={this.onClickSave}>
+        <input
+          type="text"
+          placeholder="Imię"
+          value={this.state.name}
+          onChange={this.onNameChange}/>
+        <div>{this.state.nameText}</div>
+        <input
+          type="text"
+          placeholder="Ulubiony zespół muzyczny"
+          value={this.state.band}
+          onChange={this.onBandChange}/>
+        <div>{this.state.bandText}</div>
+        <input
+          className="btn btn-primary btn-lg"
+          type="submit"
+          value="Potwierdzam dane"/>
+      </form>
+    );
+  }
+}
+
+Form.propTypes = {
+  name: PropTypes.string.isRequired,
+  action: PropTypes.object.isRequired
 };
 
-export default Form;
+function mapStateToProps(state, ownProps) {
+  return {
+    name: state.name
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(createName, dispatch)
+  };
+}
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(Form);

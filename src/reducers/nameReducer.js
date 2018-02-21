@@ -1,10 +1,7 @@
 import * as types from '../actions/actionTypes';
 
-export default function taskReducer(state = [], action) {
+export default function nameReducer(state = 'you', action) {
   switch (action.type) {
-    case types.CREATE_TASK:
-      return [...state, Object.assign({}, action.task)];
-
     case types.CREATE_NAME:
       return state.name;
 
