@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import * as taskActions from "../../actions/taskAction";
-import * as createName from "../../actions/nameAction";
+import * as nameAction from "../../actions/nameAction";
 import HelloPage from "./HelloPage";
 import TasksPage from "../task/TasksPage";
 
@@ -24,9 +24,9 @@ class Form extends React.Component {
   }
 
   onNameChange(event) {
-    const name = this.state.name;
+    const name = event.target.value;
     this.setState({
-      name: event.target.value
+      name: name
     });
   }
 
@@ -39,17 +39,17 @@ class Form extends React.Component {
 
   onClickSave() {
     this.props.action.createName(this.state.name);
-    this.props.action.createBand(this.state.band);
-    this.setState({
-      submitted: true
-    });
+    // this.props.action.createBand(this.state.band);
+    // this.setState({
+    //   submitted: true
+    // });
 
   }
 
   render() {
-    if(this.state.submited) {
-      return <TasksPage />;
-    }
+    // if(this.state.submitted) {
+    //   return <TasksPage />;
+    // }
     return (
       <form onSubmit={this.onClickSave}>
         <input
@@ -72,11 +72,11 @@ class Form extends React.Component {
     );
   }
 }
-
-Form.propTypes = {
-  name: PropTypes.string.isRequired,
-  action: PropTypes.object.isRequired
-};
+//
+// Form.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   action: PropTypes.object.isRequired
+// };
 
 function mapStateToProps(state, ownProps) {
   return {
@@ -86,7 +86,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(createName, dispatch)
+    actions: bindActionCreators(nameAction, dispatch)
   };
 }
 

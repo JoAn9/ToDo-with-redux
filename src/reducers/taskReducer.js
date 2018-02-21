@@ -5,9 +5,6 @@ export default function taskReducer(state = [], action) {
     case types.CREATE_TASK:
       return [...state, Object.assign({}, action.task)];
 
-    case types.CREATE_NAME:
-      return state.name;
-
     default:
       return state;
   }
